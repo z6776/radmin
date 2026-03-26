@@ -27,8 +27,9 @@ function Layout() {
   const { pathname } = useLocation();
   const token = getToken();
   const outlet = useOutlet();
-  const keepaliveRef = useKeepAliveRef();
+  const keepaliveRef = useKeepAliveRef(); // 由keepAlive-for-react创建
   const [isLoading, setLoading] = useState(true);
+  // contextHolder 接入到react 组件树  承接App样式
   const [messageApi, contextHolder] = message.useMessage();
   const setAliveRef = usePublicStore(useShallow((state) => state.setAliveRef));
   const aliveRef = usePublicStore(useShallow((state) => state.aliveRef));
@@ -59,6 +60,7 @@ function Layout() {
 
   // 只在 ref 变化时更新 store，避免每次渲染都触发更新
   useEffect(() => {
+    // 锁 只触发一次
     if (keepaliveRef.current && !aliveRef.current) {
       setAliveRef(keepaliveRef);
     }
@@ -172,17 +174,20 @@ function Layout() {
     <div id="layout">
       {contextHolder}
       {permissions.length > 0 && menuList.length > 0 && <Menu />}
-
+      {/* 公共样式用的styles */}
       <div className={styles.layout_right}>
         <div id="header" className={headerClassName}>
           <Header />
           {permissions.length > 0 && menuList.length > 0 && <Tabs aliveRef={keepaliveRef} />}
         </div>
         <div id="layout-content" className={contentClassName}>
+          {/* 骨架屏 */}
           {isLoading && permissions.length === 0 && (
             <Skeleton active className="p-30px" paragraph={{ rows: 10 }} />
           )}
+          {/* 无权访问 */}
           {!isLoading && permissions.length === 0 && <Forbidden />}
+          {/* 缓存组件 保留组件状态  */}
           <KeepAlive aliveRef={keepaliveRef} activeCacheKey={currentCacheKey} max={10}>
             {permissions.length > 0 && (
               <motion.div
@@ -211,4 +216,6 @@ function Layout() {
   );
 }
 
+
+// memo 懒加载Layout组件   父组件没有依赖变化时 layout组件不变
 export default memo(Layout);

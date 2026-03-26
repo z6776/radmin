@@ -7,6 +7,7 @@ interface Props {
 }
 
 function BaseContent(props: Props) {
+  // 用 children  表示slot
   const { isPermission, children } = props;
 
   return (

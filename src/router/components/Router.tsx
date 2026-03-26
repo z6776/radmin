@@ -52,19 +52,19 @@ function App() {
   }, []);
 
   // 使用 useMemo 缓存路由配置，避免每次渲染都重新创建
-  const routes = useMemo(() => {
+  const routes = useMemo(() => {   // 本质是闭包的morize函数 加 依赖更新
     const layouts = handleRoutes(pages);
     const newRoutes: RouteObject[] = [
-      {
-        path: 'login',
-        element: <Login />,
-      },
       {
         path: 'forget',
         element: <Forget />,
       },
       {
-        path: '',
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: '/',
         element: <Guards />,
         children: layouts,
       },

@@ -73,7 +73,7 @@ const BaseSearch = (props: Props) => {
     return showNum < list.length;
   }, [defaultColCount, defaultRowExpand, isRowExpand, list.length]);
 
-  // 初始化内容
+  // 初始化内容对
   useEffect(() => {
     try {
       if (Object.keys(data).length && isFirst) {
@@ -134,31 +134,31 @@ const BaseSearch = (props: Props) => {
 
     return list;
   };
-
+  
   /** 获取表单label宽度 */
-  const getLabelCol = (item?: BaseSearchList) => {
+   const getLabelCol = (item?: BaseSearchList) => {
     if (item?.labelWidth) {
       return { style: { width: item.labelWidth } };
     }
-
+  
     if (item?.labelCol) return item.labelCol;
     if (labelCol) return labelCol;
-
+  
     return type === 'grid' && !isPhone ? { span: 6 } : undefined;
   };
-
+  
   /** 获取输入间隙 */
   const getWrapperCol = (item?: BaseSearchList) => {
     if (item?.wrapperWidth) {
       return { style: { width: item.wrapperWidth } };
     }
-
+  
     if (item?.wrapperCol) return item.wrapperCol;
     if (wrapperCol) return wrapperCol;
-
+  
     return type === 'grid' && !isPhone ? { span: 18 } : undefined;
   };
-
+  
   /**
    * 提交表单
    * @param values - 表单值

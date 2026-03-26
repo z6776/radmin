@@ -209,7 +209,7 @@ function Login() {
   const onForgetPassword = () => {
     navigate(`/forget${search}`);
   };
-
+  console.log("searchsearchsearch", search);
   return (
     <>
       {contextHolder}

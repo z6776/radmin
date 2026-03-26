@@ -215,7 +215,7 @@ export function getComponent(t: TFunction, item: BaseFormList, form: FormInstanc
     />
   );
 
-  // 当组件类型为自定义时
+  // 当组件类型为自定义时 添加到自定义
   if (component === 'customize') {
     const { render } = item;
     // 获取组件自定义渲染失败直接返回空标签
@@ -231,7 +231,7 @@ export function getComponent(t: TFunction, item: BaseFormList, form: FormInstanc
   // 查找懒加载组件
   const LazyComponent = lazyComponents.get(component);
 
-  // 如果找到对应的懒加载组件，返回包装后的组件
+  // 如果找到对应的懒加载组件，返回包装后的组件  已加载的组件可以直接返回
   if (LazyComponent) {
     return (
       <LazyComponentWrapper

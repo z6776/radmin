@@ -20,10 +20,10 @@ function getTokenSync() {
 
 function Guards() {
   const { t } = useTranslation();
-  const outlet = useOutlet();
-  const navigate = useNavigate();
-  const location = useLocation();
-
+  const outlet = useOutlet();  // 路由出口
+  const navigate = useNavigate(); // 路由导航
+  const location = useLocation(); // 路由参数
+   
   // 同步检查权限，避免异步导致的页面闪动
   const { token, isValid, shouldRedirect, redirectPath } = useMemo(() => {
     const token = getTokenSync();
@@ -55,19 +55,18 @@ function Guards() {
     // 其他情况正常渲染
     return { token, isValid: !!token || isLoginRoute, shouldRedirect: false, redirectPath: '' };
   }, [location.pathname, location.search]);
-
+  
   const [redirected, setRedirected] = useState(false);
   const isRedirectingRef = useRef(false);
-
+ // 渲染页面内容
   useEffect(() => {
     // 防止重复重定向
     if (shouldRedirect && !isRedirectingRef.current) {
       isRedirectingRef.current = true;
-
+    
       // 执行重定向
       navigate(redirectPath, { replace: true });
       setRedirected(true);
-
       // 如果是跳转到登录页，显示提示信息
       if (redirectPath.startsWith('/login') && location.pathname !== '/') {
         message.warning({
@@ -98,6 +97,7 @@ function Guards() {
 
   // 使用 useMemo 缓存 Layout 组件，只在 token 和 isValid 变化时重新渲染
   const layoutElement = useMemo(() => {
+    // 路由有效且有token时渲染Layout组件
     if (isValid && token) {
       return (
         <Suspense
@@ -114,16 +114,15 @@ function Guards() {
     return null;
   }, [token, isValid]);
 
-  // 渲染页面内容
-  if (location.pathname === '/login' && token) {
-    return <div>{outlet}</div>;
-  }
+
+  // if (location.pathname === '/login' && token) {
+  //   return <div>{outlet}</div>;
+  // }
 
   if (layoutElement) {
     return layoutElement;
   }
 
-  return <div>{outlet}</div>;
 }
 
 export default Guards;

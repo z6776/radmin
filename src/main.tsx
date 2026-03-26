@@ -43,6 +43,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <Router />
   </StyleProvider>,
 );
+// main.tsx ->  index.tsx hashRouter -> useRoutes([{}])
 
 // 关闭loading
 const firstElement = document.getElementById('first');
