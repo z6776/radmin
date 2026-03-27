@@ -6,9 +6,9 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 i18n
   .use(Backend)
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
+  .use(LanguageDetector)   // 
+  .use(initReactI18next) // 向全局上下文注入
+  .init({  // 单例模式
     debug: true,
     fallbackLng: 'zh',
     interpolation: {

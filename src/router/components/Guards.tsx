@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo, useRef, lazy, Suspense } from 'react';
-import { useLocation, useNavigate, useOutlet } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { message } from '@south/message';
 import { getLocalInfo } from '@south/utils';
@@ -11,6 +11,8 @@ const Layout = lazy(() => import('@/layouts'));
 
 // 同步方式获取token
 function getTokenSync() {
+
+  
   try {
     return getLocalInfo<string>(TOKEN) || '';
   } catch {
@@ -20,7 +22,7 @@ function getTokenSync() {
 
 function Guards() {
   const { t } = useTranslation();
-  const outlet = useOutlet();  // 路由出口
+  // const outlet = useOutlet();  // 路由出口
   const navigate = useNavigate(); // 路由导航
   const location = useLocation(); // 路由参数
    

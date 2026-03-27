@@ -24,7 +24,7 @@ export const searchList = (t: TFunction): BaseFormList[] => [
     wrapperWidth: 200,
     component: 'ApiSelect',
     componentProps: {
-      api: getPartnerDemo as ApiFn,
+      api: getPartnerDemo as ApiFn,  // 数据获取
       params: [
         '/platform/partner',
         {
@@ -36,5 +36,11 @@ export const searchList = (t: TFunction): BaseFormList[] => [
         value: 'id',
       },
     },
+  },
+  {
+    label: t('public.adminName'),
+    name: 'adminName',
+    wrapperWidth: 250,
+    component: 'Input'
   },
 ];

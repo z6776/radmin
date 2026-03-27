@@ -80,4 +80,5 @@ export default {
   noLoginVisit: '未登录无法访问',
   loading: '加载中',
   uploadFile: '上传文件',
+  adminName:"管理员名称"
 };

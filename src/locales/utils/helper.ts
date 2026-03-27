@@ -28,7 +28,7 @@ export const getZhLangNamespaces = () => {
     eager: true,
   }) as FileParams;
   const namespace = filterNamespaceData(langFiles);
-  const result = handleFileNamespaceList(namespace);
+  const result = handleFileNamespaceList(namespace);// result :{ zh:{} }
   return result;
 };
 
@@ -104,6 +104,7 @@ const handleFileNamespaceList = (files: FileParams) => {
 
     result[namespace][name] = data;
   }
+ 
 
   return result;
 };

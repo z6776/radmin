@@ -204,3 +204,48 @@ const menuList = defaultMenus;
 | 微信 | 支付宝 |
 | --- | --- |
 | <img src="https://github.com/southliu/github-static/blob/main/pay/wechat.jpg" width="250" alt="wechat"> | <img src="https://github.com/southliu/github-static/blob/main/pay/alipay.jpg" width="250" alt="alipay">  |
+
+
+
+<!-- const $lbScreen =  watch(()=>route, (newVal) => {
+      
+      if(routes.indexOf(newVal.path) ===-1){
+        clearInterval(timerLb.value as number);
+        timerLb.value = null;
+        console.log("清除定时器");
+        return;
+      }
+        state.value ++;
+        if (state.value > 2) {
+            state.value = 0;
+      }
+      // 初始化
+      if (routes.indexOf(newVal.path) > -1 && timerLb.value === null) {
+        pathTo()
+      }      
+},{immediate:true,deep:true});
+
+
+window.addEventListener('mousemove', (e) => {
+  if (timer){  
+    clearTimeout(timer);
+    clearInterval(timerLb.value as number);
+    timerLb.value = null;
+  } 
+  if(routes.indexOf(route.path) ===-1){
+    return;
+  }
+  // 停止移动
+  timer = setTimeout(() => {
+    pathTo()
+  }, STOP_DELAY);
+});
+
+function pathTo(){
+       timerLb.value = setInterval(() => {
+       console.log(routes[state.value],Date.now() - last,"跳转");
+            last = Date.now();
+            router.push(routes[state.value]!)
+         },STOP_DELAY_LB);
+}
+优化一下 怎么写都感觉有bug -->
